@@ -46,7 +46,7 @@ async function run() {
       const allItems = await itemsCollection.find({}).toArray();
       res.send(allItems);
     }); 
-    app.get("/review", verifyJWT, async (req, res) => {
+    app.get("/review",  async (req, res) => {
       const allReview = await reviewCollection.find({}).toArray();
       res.send(allReview);
     });
