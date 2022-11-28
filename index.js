@@ -57,16 +57,26 @@ async function run() {
       res.send({ success: true, result });
     });
 
-    app.get("/orders", verifyJWT, async (req, res) => {
+    app.get("/orders", verifyJWT,  async (req, res) => {
       const allItems = await ordersCollection.find({}).toArray();
       res.send(allItems);
+  
     });
 
-    app.get("/orders/:client", verifyJWT, async (req, res) => {
+    app.get("/orders/:client", verifyJWT,  async (req, res) => {
       const client = req.params.client;
       const query = { client: client };
       const specificOrder = await ordersCollection.find(query).toArray();
       res.send(specificOrder);
+      // console.log(client)
+    });
+
+    app.get("/order/:isAdmin", verifyJWT,  async (req, res) => {
+      // const isAdmin = req.params.isAdmin;
+      const query = { isAdmin: true };
+      const adminOrder = await ordersCollection.find(query).toArray();
+      res.send(adminOrder);
+
     });
 
     app.get("/items/:category", async (req, res) => {
